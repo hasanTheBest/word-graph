@@ -2,12 +2,10 @@ import React from "react";
 
 const SearchResultItem = () => {
   return (
-    <div className="stats shadow">
-      <div className="stat">
-        <div className="stat-title">Total Page Views</div>
-        <div className="stat-value">89,400</div>
-        <div className="stat-desc">21% more than last month</div>
-      </div>
+    <div className="stat place-items-center">
+      <div className="stat-title">Downloads</div>
+      <div className="stat-value">31K</div>
+      <div className="stat-desc">From January 1st to February 1st</div>
     </div>
   );
 };

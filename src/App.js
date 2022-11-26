@@ -13,7 +13,7 @@ function App() {
       <main className="App">
         <FormInput />
 
-        <div className="stats stats-vertical lg:stats-horizontal shadow">
+        <div className="stats shadow">
           {new Array(6).fill(1).map((item) => (
             <SearchResultItem />
           ))}
