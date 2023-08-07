@@ -13,7 +13,7 @@ function App() {
       <main className="App">
         <FormInput />
 
-        <div className="stats shadow">
+        <div className="grid grid-cols-3 shadow">
           {new Array(6).fill(1).map((item) => (
             <SearchResultItem />
           ))}
