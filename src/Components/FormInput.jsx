@@ -1,11 +1,16 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const FormInput = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmitWordSearchForm = (data) =>
+    console.log("onSubmitWordSearchForm", data);
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmitWordSearchForm)}>
       <div className="form-control">
         <div className="input-group">
-          <select className="select select-bordered">
+          <select className="select select-bordered" {...register("filter")}>
             <option disabled selected>
               Pick Constraints
             </option>
