@@ -1,9 +1,11 @@
+import { useState } from "react";
 import Footer from "./Components/Footer";
 import FormInput from "./Components/FormInput";
 import Navbar from "./Components/Navbar";
 import SearchResultItem from "./Components/SearchResultItem";
 
 function App() {
+  const [words, setWords] = useState([]);
   return (
     <>
       <header>
@@ -11,11 +13,11 @@ function App() {
       </header>
 
       <main className="App">
-        <FormInput />
+        <FormInput setWords={setWords} />
 
         <div className="grid grid-cols-3 shadow">
-          {new Array(6).fill(1).map((item) => (
-            <SearchResultItem />
+          {words.map((word) => (
+            <SearchResultItem word={word} />
           ))}
         </div>
       </main>

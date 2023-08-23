@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchResultItem = () => {
+const SearchResultItem = (word) => {
   return (
     <div className="stat place-items-center">
       <div className="stat-title">Downloads</div>

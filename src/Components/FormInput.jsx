@@ -1,10 +1,26 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FormInput = () => {
+const BASE_URL = "https://api.datamuse.com/words?";
+
+const searchWord = async (url) => {
+  console.log("apiUrl", url);
+
+  const res = await fetch(url);
+  const result = await res.json();
+  console.log("apiResponse", result);
+  return result;
+};
+
+const FormInput = ({ setWords }) => {
   const { register, handleSubmit } = useForm();
-  const onSubmitWordSearchForm = (data) =>
-    console.log("onSubmitWordSearchForm", data);
+  const onSubmitWordSearchForm = async (data) => {
+    const apiResponse = await searchWord(
+      BASE_URL + data.filter + "=" + data.word
+    );
+
+    setWords(apiResponse);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmitWordSearchForm)}>
@@ -49,6 +65,7 @@ const FormInput = () => {
                 type="text"
                 placeholder="Search…"
                 className="input input-bordered"
+                {...register("word")}
               />
               <button className="btn">Go</button>
             </div>
