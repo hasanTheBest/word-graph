@@ -15,8 +15,26 @@ const searchWord = async (url) => {
 const FormInput = ({ setWords }) => {
   const { register, handleSubmit } = useForm();
   const onSubmitWordSearchForm = async (data) => {
+    console.log("form data", data);
+
+    // const metaQuery = Object.entries(data).filter(([key, value]) =>
+    //   key !== "word" || key !== "filter")
+
+    const metaQuery = { ...data }
+
+    for (const prop in metaQuery) {
+      if (prop === "word" || prop === "filter") {
+        delete metaQuery[prop]
+      }
+    }
+
+    const metaUri = metaQuery && Object.values(metaQuery).filter(val => val !== false).join(",")
+    console.log("metaQuery", metaQuery);
+
+
+
     const apiResponse = await searchWord(
-      BASE_URL + data.filter + "=" + data.word
+      metaUri ? BASE_URL + data.filter + "=" + data.word + "&md=" + metaUri : BASE_URL + data.filter + "=" + data.word
     );
 
     setWords(apiResponse);
@@ -69,6 +87,38 @@ const FormInput = ({ setWords }) => {
               />
               <button className="btn">Go</button>
             </div>
+          </div>
+        </div>
+        <div className="input-group">
+          <div className="form-control">
+            <label className="cursor-pointer label">
+              <input type="checkbox" value="d" className="checkbox checkbox-accent" {...register("definition")} />
+              <span className="label-text">Definition</span>
+            </label>
+          </div>
+          <div className="form-control">
+            <label className="cursor-pointer label">
+              <input type="checkbox" value="p" className="checkbox checkbox-accent" {...register("partsOfSpeech")} />
+              <span className="label-text">Parts of speech</span>
+            </label>
+          </div>
+          <div className="form-control">
+            <label className="cursor-pointer label">
+              <input type="checkbox" value="s" className="checkbox checkbox-accent" {...register("syllableCount")} />
+              <span className="label-text">Syllable count</span>
+            </label>
+          </div>
+          <div className="form-control">
+            <label className="cursor-pointer label">
+              <input type="checkbox" value="r" className="checkbox checkbox-accent" {...register("pronunciation")} />
+              <span className="label-text">Pronunciation</span>
+            </label>
+          </div>
+          <div className="form-control">
+            <label className="cursor-pointer label">
+              <input type="checkbox" value="f" className="checkbox checkbox-accent" {...register("wordFrequency")} />
+              <span className="label-text">Word frequency</span>
+            </label>
           </div>
         </div>
       </div>

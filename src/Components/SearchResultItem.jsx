@@ -1,11 +1,20 @@
 import React from "react";
 
-const SearchResultItem = (word) => {
+const SearchResultItem = ({ word: { word, defs, tags } }) => {
+  let meta = tags?.join(", ")
+  const definitions = defs?.map((def) => (
+    <li>{def}</li>
+  ))
   return (
     <div className="stat place-items-center">
-      <div className="stat-title">Downloads</div>
-      <div className="stat-value">31K</div>
-      <div className="stat-desc">From January 1st to February 1st</div>
+      {meta && (<div className="stat-title">{meta} </div>)}
+      <div className="stat-value">{word}</div>
+      {defs && (<div className="stat-desc">
+        <ol className="list-decimal">
+
+          {definitions}
+        </ol>
+      </div>)}
     </div>
   );
 };
