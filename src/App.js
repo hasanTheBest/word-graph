@@ -12,7 +12,7 @@ function App() {
         <Navbar />
       </header>
 
-      <main className="App">
+      <main className="App p-16">
         <FormInput setWords={setWords} />
 
         <div className="grid grid-cols-3 shadow">
